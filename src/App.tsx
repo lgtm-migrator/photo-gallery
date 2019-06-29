@@ -1,12 +1,24 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import logo from './logo.svg';
+import React, { useEffect, useCallback } from 'react';
+// import Button from 'react-bootstrap/Button';
+// import logo from './logo.svg';
 import './App.css';
+import PhotosList from './components/photosList/PhotosList';
+import { IPhoto } from './interfaces/photo.interface';
 
-const App: React.FC = () => {
+const App: React.FC<Props> = (props) => {
+  const {
+    getPhotos,
+  } = props;
+  const getPhotosMemoized = useCallback(
+    getPhotos,
+    [],
+  );
+  useEffect(() => { getPhotosMemoized(); }, [getPhotosMemoized]);
+
+  console.log('=-= props', props)
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -20,9 +32,23 @@ const App: React.FC = () => {
           Learn React
         </a>
         <Button>Test bootstrap</Button>
-      </header>
+      </header> */}
+      <PhotosList/>
     </div>
   );
 };
 
 export default App;
+
+export interface IDispatchProps {
+  getPhotos: () => void;
+}
+
+export interface IOwnProps {
+}
+
+export interface IStateProps {
+  photos: IPhoto[];
+}
+
+export type Props = IStateProps & IDispatchProps;
