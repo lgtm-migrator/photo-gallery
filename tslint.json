@@ -8,7 +8,8 @@
     "rules": {
       "import-name": false,
       "semicolon": true,
-      "ordered-imports": false
+      "ordered-imports": false,
+      "variable-name": false
     },
     "rulesDirectory": []
 }
