@@ -1,13 +1,13 @@
 import React, { useEffect, useCallback } from 'react';
-// import Button from 'react-bootstrap/Button';
-// import logo from './logo.svg';
 import './App.css';
 import PhotosList from './components/photosList/PhotosList';
 import { IPhoto } from './interfaces/photo.interface';
+import 'react-virtualized/styles.css';
 
 const App: React.FC<Props> = (props) => {
   const {
     getPhotos,
+    photos,
   } = props;
   const getPhotosMemoized = useCallback(
     getPhotos,
@@ -15,25 +15,11 @@ const App: React.FC<Props> = (props) => {
   );
   useEffect(() => { getPhotosMemoized(); }, [getPhotosMemoized]);
 
-  console.log('=-= props', props)
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Button>Test bootstrap</Button>
-      </header> */}
-      <PhotosList/>
+      <PhotosList
+        photos={photos}
+      />
     </div>
   );
 };
